@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kurisu — New Tab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#search").on("submit", function(event) {
+                event.preventDefault();
+                var args = $("#text").val().split(" ").join("+");
+                window.location.href = "https://www.google.com.au/#q=" + args;
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <img src="./logo.png" height="100px">
+        </div>
+
+        <div class="search">
+            <form id="search">
+                <input id="text" type="text" autofocus>
+            </form>
+        </div>
+
+        <div class="links">
+            <a href="https://www.messenger.com/">
+                <div class="box"><img src="./icons/messenger.png"></div>
+            </a>
+            <a href="https://twitter.com/">
+                <div class="box"><img src="./icons/twitter.png"></div>
+            </a>
+            <a href="https://www.youtube.com/feed/subscriptions">
+                <div class="box"><img src="./icons/youtube.png"></div>
+            </a>
+            <a href="https://www.tumblr.com/dashboard">
+                <div class="box"><img src="./icons/tumblr.png"></div>
+            </a>
+            <a href="https://github.com/">
+                <div class="box"><img src="./icons/github.png"></div>
+            </a>
+            <a href="https://www.reddit.com/">
+                <div class="box"><img src="./icons/reddit.png"></div>
+            </a>
+            <a href="https://play.google.com/music/listen/home">
+                <div class="box"><img src="./icons/playmusic.png"></div>
+            </a>
+            <a href="https://api.kurisubrooks.com/panel">
+                <div class="box"><img src="./icons/sherlock.png"></div>
+            </a>
+            <a href="http://mana.kurisubrooks.com/">
+                <div class="box"><img src="./icons/mana.png"></div>
+            </a>
+            <a href="cloud.digitalocean.com/droplets/16552567/graphs">
+                <div class="box"><img src="./icons/digitalocean.png"></div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
