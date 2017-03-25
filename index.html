@@ -26,6 +26,8 @@
         };
 
         $(function() {
+            var state = false;
+
             $("#search").on("submit", function(event) {
                 event.preventDefault();
                 window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
@@ -34,9 +36,26 @@
 
             $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
                 if (!data.ok) return console.error("API Response:", data.error);
-                var icon = icons[data.weather.icon] || icons["unknown"],
-                    temp = data.weather.temperature;
+                var icon = icons[data.weather.icon] || icons["unknown"], temp = data.weather.temperature;
                 return $("#weather").html(icon + "&nbsp;&nbsp;" + temp + "°");
+            });
+
+            $("#show").on("click", function(event) {
+                state = !state;
+
+                console.log(state);
+
+                if (state) {
+                    console.log("open");
+                    $(".ghost").show();
+                    $(".links").addClass("open");
+                    $("#show img").attr("src", "./icons/up.svg");
+                } else {
+                    console.log("close");
+                    $(".ghost").hide();
+                    $(".links").removeClass("open");
+                    $("#show img").attr("src", "./icons/down.svg");
+                }
             });
         });
     </script>
@@ -44,6 +63,8 @@
 <body>
 
     <div class="container">
+        <div class="overlay"></div>
+
         <div class="header">
             <div class="logo">
                 <img src="./logo.png" height="100px">
@@ -52,42 +73,63 @@
 
         <div class="search">
             <form id="search">
-                <input id="text" type="text" placeholder="Search" autofocus autocomplete="off">
+                <input id="text" type="text" placeholder="Search" autocomplete="off">
                 <span id="weather"></span>
             </form>
         </div>
 
+        <div class="ghost">&nbsp;</div>
+
         <div class="links">
             <a href="https://www.messenger.com/">
-                <div class="box"><img src="./icons/messenger.png"></div>
+                <div class="box"><img src="./bookmarks/messenger.png"></div>
             </a>
             <a href="https://twitter.com/">
-                <div class="box"><img src="./icons/twitter.png"></div>
+                <div class="box"><img src="./bookmarks/twitter.png"></div>
             </a>
             <a href="https://www.youtube.com/feed/subscriptions">
-                <div class="box"><img src="./icons/youtube.png"></div>
+                <div class="box"><img src="./bookmarks/youtube.png"></div>
             </a>
             <a href="https://www.tumblr.com/dashboard">
-                <div class="box"><img src="./icons/tumblr.png"></div>
+                <div class="box"><img src="./bookmarks/tumblr.png"></div>
             </a>
             <a href="https://github.com/">
-                <div class="box"><img src="./icons/github.png"></div>
+                <div class="box"><img src="./bookmarks/github.png"></div>
             </a>
             <a href="https://www.reddit.com/">
-                <div class="box"><img src="./icons/reddit.png"></div>
+                <div class="box"><img src="./bookmarks/reddit.png"></div>
             </a>
             <a href="https://play.google.com/music/listen/home">
-                <div class="box"><img src="./icons/playmusic.png"></div>
+                <div class="box"><img src="./bookmarks/playmusic.png"></div>
             </a>
             <a href="https://api.kurisubrooks.com/panel">
-                <div class="box"><img src="./icons/sherlock.png"></div>
+                <div class="box"><img src="./bookmarks/sherlock.png"></div>
             </a>
             <a href="http://mana.kurisubrooks.com/">
-                <div class="box"><img src="./icons/mana.png"></div>
+                <div class="box"><img src="./bookmarks/mana.png"></div>
             </a>
             <a href="https://cloud.digitalocean.com/droplets/">
-                <div class="box"><img src="./icons/digitalocean.png"></div>
+                <div class="box"><img src="./bookmarks/digitalocean.png"></div>
             </a>
+            <a href="">
+                <div class="box"><img src="./logo.png"></div>
+            </a>
+            <a href="">
+                <div class="box"><img src="./logo.png"></div>
+            </a>
+            <a href="">
+                <div class="box"><img src="./logo.png"></div>
+            </a>
+            <a href="">
+                <div class="box"><img src="./logo.png"></div>
+            </a>
+            <a href="">
+                <div class="box"><img src="./logo.png"></div>
+            </a>
+        </div>
+
+        <div class="show" id="show">
+            <img src="./icons/down.svg">
         </div>
     </div>
 

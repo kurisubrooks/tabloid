@@ -33,7 +33,7 @@ body {
     justify-content: center;
     margin: 0 auto;
     max-width: 490px !important;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 40px;
 }
 
@@ -93,8 +93,11 @@ body {
 
 .container .links {
     display: flex;
+    height: 180px;
     flex-wrap: wrap;
     justify-content: center;
+    overflow-y: hidden;
+    transition: height 1s;
 }
 
 .container .links .box {
@@ -117,4 +120,43 @@ body {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     height: 58px;
+    border-radius: 50%;
+}
+
+.container .links.open {
+    position: absolute;
+    top: 50%; left: 50%;
+    z-index: 2;
+    height: auto;
+    max-height: 90%;
+    margin: 20px 0 0;
+    padding: 40px 0 20px;
+    transform: translate(-50%, -55%);
+    background: #2F2F2F;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.container .ghost {
+    display: none;
+    height: 180px !important;
+}
+
+.container .show {
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    margin-top: 40px;
+    background: #333;
+    padding: 11px 9px 4px;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.container .show:hover {
+    background: #3F3F3F;
+}
+
+.container .show img {
+    height: 32px;
 }
