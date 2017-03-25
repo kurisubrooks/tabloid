@@ -7,12 +7,36 @@
     <link href="./css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script>
+        var icons = {
+            "showers_rain": "🌧",
+            "flurries": "🌨",
+            "wintry_mix_rain_snow": "🌨",
+            "snow_showers_snow": "🌨",
+            "isolated_scattered_tstorms_day": "⛈",
+            "isolated_scattered_tstorms_night": "⛈",
+            "clear_day": "☀️",
+            "clear_night": "🌔",
+            "cloudy": "☁️",
+            "haze_fog_dust_smoke": "🌫",
+            "mostly_cloudy_day": "🌥",
+            "mostly_cloudy_night": "🌥",
+            "mostly_sunny": "🌤",
+            "partly_sunny": "🌥",
+            "unknown": "❔"
+        };
+
         $(function() {
             $("#search").on("submit", function(event) {
                 event.preventDefault();
-                var args = $("#text").val().split(" ").join("+");
-                window.location.href = "https://www.google.com.au/#q=" + args;
+                window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
                 return false;
+            });
+
+            $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
+                if (!data.ok) return console.error("API Response:", data.error);
+                var icon = icons[data.weather.icon] || icons["unknown"],
+                    temp = data.weather.temperature;
+                return $("#weather").html(icon + "&nbsp;&nbsp;" + temp + "°");
             });
         });
     </script>
@@ -20,13 +44,16 @@
 <body>
 
     <div class="container">
-        <div class="logo">
-            <img src="./logo.png" height="100px">
+        <div class="header">
+            <div class="logo">
+                <img src="./logo.png" height="100px">
+            </div>
         </div>
 
         <div class="search">
             <form id="search">
-                <input id="text" type="text" autofocus>
+                <input id="text" type="text" placeholder="Search" autofocus autocomplete="off">
+                <span id="weather"></span>
             </form>
         </div>
 
