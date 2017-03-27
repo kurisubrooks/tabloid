@@ -1,64 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>New Tab</title>
+    <title>Tabloid</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./logos/32.png">
     <link href="./css/style.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script>
-        var icons = {
-            "showers_rain": "🌧",
-            "flurries": "🌨",
-            "wintry_mix_rain_snow": "🌨",
-            "snow_showers_snow": "🌨",
-            "isolated_scattered_tstorms_day": "⛈",
-            "isolated_scattered_tstorms_night": "⛈",
-            "clear_day": "☀️",
-            "clear_night": "🌔",
-            "cloudy": "☁️",
-            "haze_fog_dust_smoke": "🌫",
-            "mostly_cloudy_day": "🌥",
-            "mostly_cloudy_night": "🌥",
-            "mostly_sunny": "🌤",
-            "partly_sunny": "🌥",
-            "unknown": "❔"
-        };
-
-        $(function() {
-            var state = false;
-
-            $("#search").on("submit", function(event) {
-                event.preventDefault();
-                window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
-                return false;
-            });
-
-            $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
-                if (!data.ok) return console.error("API Response:", data.error);
-                var icon = icons[data.weather.icon] || icons["unknown"], temp = data.weather.temperature;
-                return $("#weather").html(icon + "&nbsp;&nbsp;" + temp + "°");
-            });
-
-            $("#show").on("click", function(event) {
-                state = !state;
-
-                console.log(state);
-
-                if (state) {
-                    console.log("open");
-                    $(".ghost").show();
-                    $(".links").addClass("open");
-                    $("#show img").attr("src", "./icons/up.svg");
-                } else {
-                    console.log("close");
-                    $(".ghost").hide();
-                    $(".links").removeClass("open");
-                    $("#show img").attr("src", "./icons/down.svg");
-                }
-            });
-        });
-    </script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/script.js"></script>
 </head>
 <body>
 
@@ -67,14 +16,14 @@
 
         <div class="header">
             <div class="logo">
-                <img src="./logo.png" height="100px">
+                <img src="./logos/112.png" height="100px">
             </div>
         </div>
 
         <div class="search">
             <form id="search">
                 <input id="text" type="text" placeholder="Search" autocomplete="off">
-                <span id="weather"></span>
+                <span id="weather">...</span>
             </form>
         </div>
 
