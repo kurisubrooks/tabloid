@@ -32,7 +32,7 @@ $(function () {
             $("#weather #details").text("Error");
             $("#weather #condition").text(data.error);
             $("#weather #hilo").text("Try again later");
-            $("#weather #icon").attr("src", "./icons/error.png");
+            $("#weather #icon").attr("src", "./icons/weather/unknown.png");
             return false;
         }
 
@@ -45,7 +45,7 @@ $(function () {
         $("#weather #details").text(temp + "° in " + city);
         $("#weather #condition").text(condition);
         $("#weather #hilo").text("Hi: " + forecast.high + "° Lo: " + forecast.low + "°");
-        $("#weather #icon").attr("src", icon);
+        $("#weather #icon").attr("src", "./icons/weather/" + data.weather.icon + "_dark.png");
 
         return false;
     });
