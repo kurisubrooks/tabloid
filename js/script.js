@@ -1,7 +1,15 @@
+var state = false;
 var name = "kurisu";
 
 function firstCap(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function toggleBookmarks() {
+    state = !state;
+    $(".toggle").toggleClass("active");
+    $(".container").toggleClass("blurred");
+    $(".overlay").toggleClass("open");
 }
 
 function loop() {
@@ -62,8 +70,11 @@ $(function () {
     });
 
     $("#show").on("click", function(event) {
-        $(".toggle").toggleClass("active");
-        $(".container").toggleClass("blurred");
-        $(".overlay").toggleClass("open");
+        toggleBookmarks();
+    });
+    
+    $(document).on("keyup", function(event) {
+        if (event.keyCode === 27 && state) toggleBookmarks();
+        if (event.keyCode === 192) toggleBookmarks();
     });
 });
