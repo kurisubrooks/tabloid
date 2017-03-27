@@ -21,20 +21,36 @@ var icons = {
 $(function () {
     var state = false;
 
-    $("#search").on("submit", function (event) {
+    $("#search").on("submit", function(event) {
         event.preventDefault();
         window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
         return false;
     });
 
-    $.getJSON("https://api.kurisubrooks.com/api/weather", function (data) {
-        if (!data.ok) return console.error("API Response:", data.error);
-        var icon = icons[data.weather.icon] || icons["unknown"],
-            temp = data.weather.temperature;
-        return $("#weather").html(icon + "&nbsp;&nbsp;" + temp + "°");
+    $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
+        if (!data.ok) {
+            $("#weather #details").text("Error");
+            $("#weather #condition").text(data.error);
+            $("#weather #hilo").text("Try again later");
+            $("#weather #icon").attr("src", "./icons/error.png");
+            return false;
+        }
+
+        var icon = data.weather.image,
+            temp = data.weather.temperature,
+            city = data.location.city,
+            condition = data.weather.condition,
+            forecast = data.forecast[0];
+        
+        $("#weather #details").text(temp + "° in " + city);
+        $("#weather #condition").text(condition);
+        $("#weather #hilo").text("Hi: " + forecast.high + "° Lo: " + forecast.low + "°");
+        $("#weather #icon").attr("src", icon);
+
+        return false;
     });
 
-    $("#show").on("click", function (event) {
+    $("#show").on("click", function(event) {
         state = !state;
 
         if (state) {

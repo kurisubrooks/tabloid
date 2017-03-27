@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
-}
-
 body {
     margin: 0;
     font-size: 14px;
@@ -18,14 +13,19 @@ body {
 }
 
 .container {
-    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
     flex-direction: column;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 100px auto 50px;
     padding: 0 20px;
+}
+
+@media (max-width: 535px) {
+    .container {
+        margin-top: 40px;
+    }
 }
 
 .container .header {
@@ -44,7 +44,8 @@ body {
 
 .container .header,
 .container .search,
-.container .links {
+.container .bookmarks,
+.container .cards {
     min-width: 300px;
     max-width: 600px;
     width: 100%;
@@ -52,13 +53,10 @@ body {
 
 .container .search {
     padding: 6px 16px;
-    margin-bottom: 50px;
-    margin: 0 15px 50px;
     background: #333333;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
     transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
     border-radius: 1px;
-    max-width: 490px;
 }
 
 .container .search:hover {
@@ -71,7 +69,7 @@ body {
     font: inherit;
     border: none;
     background: transparent;
-    width: calc(100% - 60px);
+    width: 100%;
     height: 30px;
     font-size: 16px;
     color: #FFFFFF;
@@ -81,42 +79,36 @@ body {
     outline: none;
 }
 
-.container .search span {
-    width: 20px;
-    font-weight: 300;
-    position: relative;
-    right: -5px;
-    cursor: default;
-    user-select: none;
-    color: rgba(255, 255, 255, 0.4);
-    text-align: right;
-}
-
-.container .links {
+.container .bookmarks {
     display: flex;
-    height: 180px;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;
     justify-content: center;
-    overflow-y: hidden;
+    overflow-y: hidden;*/
+    overflow-x: auto;
+    margin-top: 20px;
     transition: height 1s;
 }
 
-.container .links .box {
+.container .bookmarks .box {
     display: inline-block;
     height: 74px;
     width: 74px;
     cursor: pointer;
     background: #333;
-    margin: 0 15px 20px;
+    margin: 0 31px 5px 0;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-.container .links .box:hover {
+.container .bookmarks a:last-of-type .box {
+    margin-right: 1px;
+}
+
+.container .bookmarks .box:hover {
     background: #3F3F3F;
 }
 
-.container .links .box img {
+.container .bookmarks .box img {
     position: relative;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -124,7 +116,7 @@ body {
     border-radius: 50%;
 }
 
-.container .links.open {
+.container .bookmarks.open {
     position: absolute;
     top: 50%; left: 50%;
     z-index: 2;
@@ -160,4 +152,52 @@ body {
 
 .container .show img {
     height: 32px;
+}
+
+.container .cards {
+    display: flex;
+    width: 100%;
+    margin-top: 18px;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.container .cards .card {
+    flex: 1;
+    display: flex;
+    padding: 16px 20px;
+    background: #333;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.container .cards .card:nth-child(odd) {
+    margin-right: 15px;
+}
+
+.container .cards .card:nth-child(even) {
+    margin-left: 15px;
+}
+
+.container .cards .card .left {
+    flex: 1;
+}
+
+.container .cards .card .right {
+    flex: 0;
+}
+
+.container .cards .card h3 {
+    margin: 0;
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.container .cards .card h5 {
+    margin: 0;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
 }

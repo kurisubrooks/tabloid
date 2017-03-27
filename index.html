@@ -23,13 +23,12 @@
         <div class="search">
             <form id="search">
                 <input id="text" type="text" placeholder="Search" autocomplete="off">
-                <span id="weather">...</span>
             </form>
         </div>
 
         <div class="ghost">&nbsp;</div>
 
-        <div class="links">
+        <div class="bookmarks">
             <a href="https://www.messenger.com/">
                 <div class="box"><img src="./bookmarks/messenger.png"></div>
             </a>
@@ -62,9 +61,22 @@
             </a>
         </div>
 
-        <div class="show" id="show">
-            <img src="./icons/down.svg">
+        <div class="cards">
+            <div class="card" style="visibility: hidden;"></div>
+            <div class="card" id="weather">
+                <div class="left">
+                    <h3><span id="details"></span></h3>
+                    <h5><span id="condition">·</span> &nbsp;·&nbsp; <span id="hilo">·</span></h5>
+                </div>
+                <div class="right">
+                    <img src="./icons/unknown.png" height="54px" id="icon">
+                </div>
+            </div>
         </div>
+
+        <!-- <div class="show" id="show">
+            <img src="./icons/down.svg">
+        </div> -->
     </div>
 
 </body>
