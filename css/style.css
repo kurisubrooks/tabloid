@@ -11,6 +11,7 @@ body {
 
 body {
     margin: 0;
+    font-size: 14px;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Roboto", Helvetica, sans-serif, "Apple Color Emoji";
     background: #2A2A2A;
     color: #FFFFFF;
