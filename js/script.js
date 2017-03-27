@@ -60,7 +60,7 @@ $(function () {
             city = data.location.city,
             condition = data.weather.condition,
             forecast = data.forecast[0];
-        
+
         $("#weather #details").text(temp + "° in " + city);
         $("#weather #condition").text(condition);
         $("#weather #hilo").text("Hi: " + forecast.high + "° Lo: " + forecast.low + "°");
@@ -72,7 +72,11 @@ $(function () {
     $("#show").on("click", function(event) {
         toggleBookmarks();
     });
-    
+
+    $(".overlay").on("click", function(event) {
+        toggleBookmarks();
+    });
+
     $(document).on("keyup", function(event) {
         if (event.keyCode === 27 || event.keyCode === 192) toggleBookmarks();
     });
