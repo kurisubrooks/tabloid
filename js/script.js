@@ -74,7 +74,6 @@ $(function () {
     });
     
     $(document).on("keyup", function(event) {
-        if (event.keyCode === 27 && state) toggleBookmarks();
-        if (event.keyCode === 192) toggleBookmarks();
+        if (event.keyCode === 27 || event.keyCode === 192) toggleBookmarks();
     });
 });
