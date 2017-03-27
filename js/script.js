@@ -1,4 +1,3 @@
-var state = false;
 var name = "kurisu";
 
 function firstCap(string) {
@@ -63,18 +62,8 @@ $(function () {
     });
 
     $("#show").on("click", function(event) {
-        state = !state;
-
-        if (state) {
-            console.log("open");
-            $(".ghost").show();
-            $(".links").addClass("open");
-            $("#show img").attr("src", "./icons/up.svg");
-        } else {
-            console.log("close");
-            $(".ghost").hide();
-            $(".links").removeClass("open");
-            $("#show img").attr("src", "./icons/down.svg");
-        }
+        $(".toggle").toggleClass("active");
+        $(".container").toggleClass("blurred");
+        $(".overlay").toggleClass("open");
     });
 });

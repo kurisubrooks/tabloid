@@ -33,6 +33,11 @@ ul, li {
     width: 100%;
     margin: 100px auto 50px;
     padding: 0 20px;
+    transition: filter .1s;
+}
+
+.container.blurred {
+    filter: blur(10px);
 }
 
 @media (max-width: 640px) {
@@ -68,21 +73,23 @@ ul, li {
     font-weight: 400;
 }
 
-.container .search {
+.container .omnibox {
     width: 100%;
-    padding: 6px 16px;
-    margin-top: 40px;
     background: #333333;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
-    border-radius: 1px;
+    border-radius: 2px;
+    margin-top: 40px;
 }
 
-.container .search:hover {
+.container .omnibox .search {
+    padding: 6px 16px;
+}
+
+.container .omnibox .search:hover {
     background: #3F3F3F;
 }
 
-.container .search input#text {
+.container .omnibox .search input#text {
     -webkit-appearance: none;
     -moz-appearance: none;
     font: inherit;
@@ -95,18 +102,24 @@ ul, li {
     color: #FFFFFF;
 }
 
-.container .search input:focus {
+.container .omnibox .search input:focus {
     outline: none;
 }
 
-.container .search input#glass {
+.container .omnibox .search input#glass {
     position: relative;
     top: 5px;
     height: 24px;
     width: 24px;
 }
 
-.container .bookmarks {
+.container .omnibox .results {
+    display: none;
+    padding: 14px 18px;
+}
+
+/*.container .bookmarks {
+    display: none;
     width: 100%;
     max-height: 222px;
     overflow-y: auto;
@@ -153,26 +166,7 @@ ul, li {
     .container .bookmarks .hidden {
         display: none;
     }
-}
-
-.container .show {
-    position: relative;
-    z-index: 3;
-    cursor: pointer;
-    margin-top: 20px;
-    background: #333;
-    padding: 11px 9px 4px;
-    border-radius: 50%;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
-}
-
-.container .show:hover {
-    background: #3F3F3F;
-}
-
-.container .show img {
-    height: 32px;
-}
+}*/
 
 .container .cards {
     display: flex;
@@ -232,4 +226,80 @@ ul, li {
         margin-right: 0 !important;
         margin-bottom: 20px;
     }
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.overlay.open {
+    display: flex !important;
+}
+
+.overlay .bookmarks {
+    margin-top: 20px;
+    height: 500px;
+    width: 700px;
+}
+
+.overlay .bookmarks ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.overlay .bookmarks ul li {
+    display: inline-block;
+    text-align: center;
+    margin: 10px 20px;
+    padding: 5px 5px 20px;
+    width: 120px;
+    border-radius: 2px;
+}
+
+.overlay .bookmarks ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.overlay .bookmarks ul li img {
+    display: inline-block;
+    height: 72px;
+}
+
+.overlay .bookmarks ul li span {
+    display: block;
+}
+
+.toggle {
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    z-index: 20;
+    cursor: pointer;
+    padding: 11px 11px 8px;
+    transform: translateX(-50%);
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.toggle:hover,
+.toggle.active {
+    background: #3F3F3F;
+}
+
+.toggle img {
+    height: 24px;
 }
