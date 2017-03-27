@@ -293,6 +293,7 @@ ul, li {
     background: #333;
     border-radius: 50%;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+    transition: background .1s;
 }
 
 .toggle:hover,
