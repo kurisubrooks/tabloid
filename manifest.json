@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+
+    "name": "Tabloid",
+    "version": "1.0.0",
+    "author": "Kurisu Brooks",
+    "description": "Replaces the 'new tab' page with a better one.",
+
+    "icons": {
+        "16": "logos/16.png",
+        "19": "logos/19.png",
+        "32": "logos/32.png",
+        "48": "logos/48.png",
+        "64": "logos/64.png",
+        "112": "logos/112.png",
+        "128": "logos/128.png"
+    },
+
+    "browser_action": {
+        "default_title": "Tabloid",
+        "default_icon": {
+            "16": "logos/16.png",
+            "19": "logos/19.png",
+            "32": "logos/32.png",
+            "48": "logos/48.png",
+            "64": "logos/64.png",
+            "112": "logos/112.png",
+            "128": "logos/128.png"
+        }
+    },
+
+    "offline_enabled": true,
+    "incognito": "not_allowed",
+    "permissions": ["storage"],
+    "chrome_url_overrides": { "newtab": "index.html" },
+    "options_ui": {
+        "page": "settings.html",
+        "chrome_style": true
+    }
+}
