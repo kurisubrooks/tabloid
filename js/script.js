@@ -13,7 +13,7 @@ function loop() {
 
     if (hour >= 18 && hour <= 23) {
         $("#daygreet").text("Good Evening");
-    } else if (hour >= 12 && hour <= 9) {
+    } else if (hour >= 0 && hour <= 9) {
         $("#daygreet").text("Good Morning");
     } else if (hour >= 10 && hour <= 14) {
         $("#daygreet").text("Good Day");
