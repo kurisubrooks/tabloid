@@ -17,12 +17,14 @@ body {
     align-items: center;
     /*justify-content: center;*/
     flex-direction: column;
-    max-width: 1000px;
+    min-width: 300px;
+    max-width: 600px;
+    width: 100%;
     margin: 100px auto 50px;
     padding: 0 20px;
 }
 
-@media (max-width: 535px) {
+@media (max-width: 640px) {
     .container {
         margin-top: 40px;
     }
@@ -30,31 +32,37 @@ body {
 
 .container .header {
     display: flex;
+    width: 100%;
     align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    max-width: 490px !important;
+    justify-content: space-between;
     padding-top: 20px;
-    padding-bottom: 40px;
 }
 
 .container .header .logo img {
     border-radius: 3px;
 }
 
-.container .header,
-.container .search,
-.container .bookmarks,
-.container .cards {
-    min-width: 300px;
-    max-width: 600px;
-    width: 100%;
+.container .header .message {
+    text-align: right;
+}
+
+.container .header .message h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.container .header .message h4 {
+    margin: 0;
+    font-weight: 400;
 }
 
 .container .search {
+    width: 100%;
     padding: 6px 16px;
+    margin-top: 40px;
     background: #333333;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
     transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
     border-radius: 1px;
 }
@@ -63,12 +71,13 @@ body {
     background: #3F3F3F;
 }
 
-.container .search input {
+.container .search input#text {
     -webkit-appearance: none;
     -moz-appearance: none;
     font: inherit;
     border: none;
     background: transparent;
+    /*width: calc(100% - 34px);*/
     width: 100%;
     height: 30px;
     font-size: 16px;
@@ -79,12 +88,21 @@ body {
     outline: none;
 }
 
+.container .search input#glass {
+    position: relative;
+    top: 5px;
+    height: 24px;
+    width: 24px;
+}
+
 .container .bookmarks {
-    display: flex;
-    /*flex-wrap: wrap;
-    justify-content: center;
-    overflow-y: hidden;*/
-    overflow-x: auto;
+    display: none;
+    /* display: flex; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    overflow-y: hidden;
+    /*overflow-x: auto;*/
     margin-top: 20px;
     transition: height 1s;
 }
@@ -95,14 +113,14 @@ body {
     width: 74px;
     cursor: pointer;
     background: #333;
-    margin: 0 31px 5px 0;
+    margin: 0 20px 20px;
     border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.container .bookmarks a:last-of-type .box {
+/*.container .bookmarks a:last-of-type .box {
     margin-right: 1px;
-}
+}*/
 
 .container .bookmarks .box:hover {
     background: #3F3F3F;
@@ -127,7 +145,7 @@ body {
     transform: translate(-50%, -55%);
     background: #2F2F2F;
     border-radius: 5px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .container .ghost {
@@ -143,7 +161,7 @@ body {
     background: #333;
     padding: 11px 9px 4px;
     border-radius: 50%;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .container .show:hover {
@@ -168,7 +186,7 @@ body {
     padding: 16px 20px;
     background: #333;
     border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .container .cards .card:nth-child(odd) {
@@ -200,4 +218,16 @@ body {
     font-size: 13px;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 640px) {
+    .container .cards {
+        display: block;
+    }
+
+    .container .cards .card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 20px;
+    }
 }

@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tabloid</title>
+    <title>New Tab</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./logos/32.png">
     <link href="./css/style.css" rel="stylesheet">
     <script src="./js/jquery.min.js"></script>
+    <script src="./js/moment.min.js"></script>
     <script src="./js/script.js"></script>
 </head>
 <body>
 
     <div class="container">
-        <div class="overlay"></div>
-
         <div class="header">
             <div class="logo">
                 <img src="./logos/112.png" height="100px">
+            </div>
+            <div class="message">
+                <h2><span id="daygreet">...</span>, <span id="name">...</span>!</h2>
+                <h4 id="quote">Let's do our best today!</h4>
             </div>
         </div>
 
         <div class="search">
             <form id="search">
                 <input id="text" type="text" placeholder="Search" autocomplete="off">
+                <!--<input id="glass" type="image" src="./icons/search.svg">-->
             </form>
         </div>
 
-        <div class="ghost">&nbsp;</div>
+        <div class="cards">
+            <div class="card" id="clock">
+                <div class="left">
+                    <h3 id="time"></h3>
+                    <h5 id="date">· &nbsp;·&nbsp; ·</h5>
+                </div>
+            </div>
+            <div class="card" id="weather">
+                <div class="left">
+                    <h3><span id="details">Loading...</span></h3>
+                    <h5><span id="condition">·</span> &nbsp;·&nbsp; <span id="hilo">·</span></h5>
+                </div>
+                <div class="right">
+                    <img src="./icons/weather/unknown.png" height="54px" id="icon">
+                </div>
+            </div>
+        </div>
 
         <div class="bookmarks">
             <a href="https://www.messenger.com/">
@@ -61,22 +81,9 @@
             </a>
         </div>
 
-        <div class="cards">
-            <div class="card" style="visibility: hidden;"></div>
-            <div class="card" id="weather">
-                <div class="left">
-                    <h3><span id="details"></span></h3>
-                    <h5><span id="condition">·</span> &nbsp;·&nbsp; <span id="hilo">·</span></h5>
-                </div>
-                <div class="right">
-                    <img src="./icons/weather/unknown.png" height="54px" id="icon">
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="show" id="show">
+        <div class="show" id="show">
             <img src="./icons/down.svg">
-        </div> -->
+        </div>
     </div>
 
 </body>

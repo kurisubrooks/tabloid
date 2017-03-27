@@ -1,31 +1,43 @@
-var icons = {
-    "showers_rain": "🌧",
-    "flurries": "🌨",
-    "wintry_mix_rain_snow": "🌨",
-    "snow_showers_snow": "🌨",
-    "isolated_scattered_tstorms_day": "⛈",
-    "isolated_scattered_tstorms_night": "⛈",
-    "clear_day": "☀️",
-    "clear_night": "🌙",
-    "cloudy": "☁️",
-    "haze_fog_dust_smoke": "🌫",
-    "mostly_cloudy_day": "🌥",
-    "mostly_cloudy_night": "🌥",
-    "mostly_sunny": "🌤",
-    "partly_sunny": "🌥",
-    "partly_cloudy_day": "🌤️",
-    "partly_cloudy_night": "🌤️",
-    "unknown": "❔"
-};
+var state = false;
+var name = "kurisu";
+
+function firstCap(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function loop() {
+    var hour = moment().format("H");
+    $("#clock #time").text(moment().format("h:mm A"));
+    $("#clock #date").text(moment().format("dddd, Do MMMM YYYY"));
+    $("#name").text(firstCap(name));
+
+    if (hour >= 18 && hour <= 23) {
+        $("#daygreet").text("Good Evening");
+    } else if (hour >= 12 && hour <= 9) {
+        $("#daygreet").text("Good Morning");
+    } else if (hour >= 10 && hour <= 14) {
+        $("#daygreet").text("Good Day");
+    } else if (hour >= 15 && hour <= 17) {
+        $("#daygreet").text("Good Afternoon");
+    } else {
+        $("#daygreet").text("Hello");
+    }
+
+    console.log(hour);
+}
 
 $(function () {
-    var state = false;
-
     $("#search").on("submit", function(event) {
         event.preventDefault();
         window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
         return false;
     });
+
+    loop();
+
+    setInterval(function() {
+        loop();
+    }, 1000);
 
     $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
         if (!data.ok) {
