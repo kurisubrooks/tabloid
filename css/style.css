@@ -116,6 +116,7 @@ body.dark .container .omnibox {
 
 .container .omnibox .search {
     padding: 6px 16px;
+    border-radius: 2px;
 }
 
 body.dark .container .omnibox .search:hover {
