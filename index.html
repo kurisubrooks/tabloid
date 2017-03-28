@@ -10,23 +10,27 @@
     <script src="./js/moment.min.js"></script>
     <script src="./js/script.js"></script>
 </head>
-<body>
+<body class="dark">
+
+    <div class="desktop"></div>
 
     <div class="container">
         <div class="header">
-            <div class="logo">
+            <!--<div class="logo">
                 <img src="./logos/112.png" height="100px">
-            </div>
+            </div>-->
             <div class="message">
                 <h2><span id="daygreet">...</span>, <span id="name">...</span>!</h2>
-                <h4 id="quote">Let's do our best today!</h4>
+                <h4 id="quote">Loading...</h4>
+                <!--<br>
+                <h4>It's currently 21°C in Penrith, NSW.<br>The forecast for today is Clear with a top of 35°C and a low of 22°C.</h4>-->
             </div>
         </div>
 
         <div class="omnibox">
             <div class="search">
                 <form id="search">
-                    <input id="text" type="text" placeholder="Search" autocomplete="off" autofocus>
+                    <input id="text" type="text" placeholder="How may I help?" autocomplete="off">
                 </form>
             </div>
             <div class="results"></div>

@@ -1,14 +1,26 @@
 var state = false;
 var name = "kurisu";
 
+var quotes = [
+    "You can't win if you don't participate",
+    "Try something today that you didn't do yesterday.",
+    "Remember to drink enough water today!",
+    "Let's make today a good day!",
+    "Let's do our best today!"
+]
+
 function firstCap(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 function toggleBookmarks() {
     state = !state;
+    $("body").toggleClass("focused");
     $(".toggle").toggleClass("active");
-    $(".container").toggleClass("blurred");
     $(".overlay").toggleClass("open");
 }
 
@@ -16,7 +28,6 @@ function loop() {
     var hour = moment().format("H");
     $("#clock #time").text(moment().format("h:mm A"));
     $("#clock #date").text(moment().format("dddd, Do MMMM YYYY"));
-    $("#name").text(firstCap(name));
 
     if (hour >= 18 && hour <= 23) {
         $("#daygreet").text("Good Evening");
@@ -34,17 +45,20 @@ function loop() {
 }
 
 $(function () {
+    loop();
+
+    $("#name").text(firstCap(name));
+    $("#quote").text(randomItem(quotes));
+
+    setInterval(function() {
+        loop();
+    }, 1000);
+
     $("#search").on("submit", function(event) {
         event.preventDefault();
         window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
         return false;
     });
-
-    loop();
-
-    setInterval(function() {
-        loop();
-    }, 1000);
 
     $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
         if (!data.ok) {
@@ -64,7 +78,7 @@ $(function () {
         $("#weather #details").text(temp + "° in " + city);
         $("#weather #condition").text(condition);
         $("#weather #hilo").text("Hi: " + forecast.high + "° Lo: " + forecast.low + "°");
-        $("#weather #icon").attr("src", "./icons/weather/" + data.weather.icon + "_dark.png");
+        $("#weather #icon").attr("src", "./icons/weather/" + data.weather.icon + "_light.png");
 
         return false;
     });
