@@ -1,12 +1,67 @@
 var state = false;
 var name = "kurisu";
 
+var bookmarks = [
+    {
+        title: "Messenger",
+        icon: "messenger",
+        hyperlink: "https://www.messenger.com/"
+    },
+    {
+        title: "Twitter",
+        icon: "twitter",
+        hyperlink: "https://twitter.com/"
+    },
+    {
+        title: "YouTube",
+        icon: "youtube",
+        hyperlink: "https://www.youtube.com/feed/subscriptions"
+    },
+    {
+        title: "Tumblr",
+        icon: "tumblr",
+        hyperlink: "https://tumblr.com/dashboard"
+    },
+    {
+        title: "GitHub",
+        icon: "github",
+        hyperlink: "https://github.com/"
+    },
+    {
+        title: "Reddit",
+        icon: "reddit",
+        hyperlink: "https://reddit.com/"
+    },
+    {
+        title: "Google Play Music",
+        icon: "playmusic",
+        hyperlink: "https://play.google.com/music/listen"
+    },
+    {
+        title: "Sherlock",
+        icon: "sherlock",
+        hyperlink: "https://api.kurisubrooks.com/panel/"
+    },
+    {
+        title: "Mana",
+        icon: "mana",
+        hyperlink: "http://mana.kurisubrooks.com/"
+    },
+    {
+        title: "DigitalOcean",
+        icon: "digitalocean",
+        hyperlink: "https://cloud.digitalocean.com/droplets/"
+    }
+];
+
 var quotes = [
     "You can't win if you don't participate",
     "Try something today that you didn't do yesterday.",
-    "Remember to drink enough water today!",
     "Let's make today a good day!",
-    "Let's do our best today!"
+    "Let's do our best today!",
+    "Are you eating enough fiber?",
+    "Remember to drink enough water today!",
+    "Are you eating enough vegetables?"
 ]
 
 function firstCap(string) {
@@ -19,9 +74,24 @@ function randomItem(array) {
 
 function toggleBookmarks() {
     state = !state;
-    $("body").toggleClass("focused");
+
+    if (!state) {
+        $(".overlay").fadeOut(100);
+        $(".container").fadeIn(100);
+    }
+
+    if (state) {
+        $(".overlay").fadeIn(100);
+        $(".container").fadeOut(100);
+    }
+
     $(".toggle").toggleClass("active");
-    $(".overlay").toggleClass("open");
+}
+
+function setBookmarks() {
+    for (let item of bookmarks) {
+        $("#bookmarks").append("<li><a href=\"" + item.hyperlink + "\"><img src=\"./bookmarks/" + item.icon + ".png\"><span>" + item.title + "</span></a></li>")
+    };
 }
 
 function loop() {
@@ -40,15 +110,46 @@ function loop() {
     } else {
         $("#daygreet").text("Hello");
     }
+}
 
-    console.log(hour);
+function handleRequest(input) {
+    let found = false;
+
+    // figure out intent
+    const patterns = {
+        convert: /((?:\+|-)?\d*\.?\d+)\s?(.+) (?:to|as|in) (.+)/,
+        radar: /^radar$/,
+        weather: /^weather$/
+    }
+
+    for (const pattern of Object.keys(patterns)) {
+        const match = new RegExp(patterns[pattern], "g");
+        const exec = match.exec(input);
+
+        if (!exec) continue;
+        found = exec;
+        console.log(found);
+
+        $(".omnibox .results").html("");
+        $(".omnibox .results").hide();
+    }
+
+    if (!found) {
+        $(".omnibox .results").show();
+        return $(".omnibox .results").html("<span>No Matches Found, Search Google?</span>");
+    }
+
+    // return window.location.href = "https://www.google.com.au/#q="
+        + encodeURIComponent($("#text").val()).replace(/%20/g, "+");
 }
 
 $(function () {
     loop();
+    setBookmarks();
 
     $("#name").text(firstCap(name));
     $("#quote").text(randomItem(quotes));
+    $("#search input").attr("placeholder", "How may I help?");
 
     setInterval(function() {
         loop();
@@ -56,8 +157,18 @@ $(function () {
 
     $("#search").on("submit", function(event) {
         event.preventDefault();
-        window.location.href = "https://www.google.com.au/#q=" + $("#text").val().split(" ").join("+");
+        handleRequest($("#text").val());
         return false;
+    });
+
+    $("#search").on("focusin", function(event) {
+        $(".search").addClass("active");
+        $(".search input").attr("placeholder", "");
+    });
+
+    $("#search").on("focusout", function(event) {
+        $(".search").removeClass("active");
+        $(".search input").attr("placeholder", "How may I help?");
     });
 
     $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {

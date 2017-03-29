@@ -22,14 +22,6 @@ body.dark {
     background: #2A2A2A;
 }
 
-body.focused .container {
-    display: none;
-}
-
-body.focused .desktop {
-    filter: blur(10px);
-}
-
 ul, li {
     margin: 0;
     padding: 0;
@@ -119,7 +111,8 @@ body.dark .container .omnibox {
     border-radius: 2px;
 }
 
-body.dark .container .omnibox .search:hover {
+body.dark .container .omnibox .search:hover,
+body.dark .container .omnibox .search.active {
     background: #3F3F3F;
 }
 
@@ -241,14 +234,14 @@ body.dark .container .cards .card {
 
 .container .cards .card h3 {
     margin: 0;
-    margin-top: 4px;
+    margin-top: 5px;
     font-size: 18px;
     font-weight: 300;
 }
 
 .container .cards .card h5 {
     margin: 0;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 13px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.7);
@@ -290,8 +283,10 @@ body.dark .container .cards .card h5 {
 
 .overlay .bookmarks {
     margin-top: 20px;
-    height: 500px;
-    width: 700px;
+    height: 400px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .overlay .bookmarks ul {
@@ -299,12 +294,12 @@ body.dark .container .cards .card h5 {
     height: 100%;
     display: flex;
     align-items: center;
+    text-align: center;
     flex-wrap: wrap;
 }
 
 .overlay .bookmarks ul li {
     display: inline-block;
-    text-align: center;
     margin: 10px 20px;
     padding: 5px 5px 20px;
     width: 120px;

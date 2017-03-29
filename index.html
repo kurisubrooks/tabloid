@@ -30,7 +30,7 @@
         <div class="omnibox">
             <div class="search">
                 <form id="search">
-                    <input id="text" type="text" placeholder="How may I help?" autocomplete="off">
+                    <input id="text" type="text" autocomplete="off">
                 </form>
             </div>
             <div class="results"></div>
@@ -39,17 +39,17 @@
         <div class="cards">
             <div class="card" id="clock">
                 <div class="left">
-                    <h3 id="time"></h3>
-                    <h5 id="date">· &nbsp;·&nbsp; ·</h5>
+                    <h3 id="time">Loading...</h3>
+                    <h5 id="date"></h5>
                 </div>
             </div>
             <div class="card" id="weather">
                 <div class="left">
                     <h3><span id="details">Loading...</span></h3>
-                    <h5><span id="condition">·</span> &nbsp;·&nbsp; <span id="hilo">·</span></h5>
+                    <h5><span id="condition"></span></h5>
                 </div>
                 <div class="right">
-                    <img src="./icons/weather/unknown.png" height="54px" id="icon">
+                    <img src="./icons/weather/unknown.png" height="52px" id="icon">
                 </div>
             </div>
         </div>
@@ -57,68 +57,7 @@
 
     <div class="overlay">
         <div class="bookmarks">
-            <ul>
-                <a href="https://www.messenger.com/">
-                    <li>
-                        <img src="./bookmarks/messenger.png">
-                        <span>Messenger</span>
-                    </li>
-                </a>
-                <a href="https://twitter.com/">
-                    <li>
-                        <img src="./bookmarks/twitter.png">
-                        <span>Twitter</span>
-                    </li>
-                </a>
-                <a href="https://www.youtube.com/feed/subscriptions">
-                    <li>
-                        <img src="./bookmarks/youtube.png">
-                        <span>YouTube</span>
-                    </li>
-                </a>
-                <a href="https://www.tumblr.com/dashboard">
-                    <li>
-                        <img src="./bookmarks/tumblr.png">
-                        <span>Tumblr</span>
-                    </li>
-                </a>
-                <a href="https://github.com/">
-                    <li>
-                        <img src="./bookmarks/github.png">
-                        <span>GitHub</span>
-                    </li>
-                </a>
-                <a href="https://www.reddit.com/">
-                    <li>
-                        <img src="./bookmarks/reddit.png">
-                        <span>Reddit</span>
-                    </li>
-                </a>
-                <a href="https://play.google.com/music/listen">
-                    <li>
-                        <img src="./bookmarks/playmusic.png">
-                        <span>Google Play Music</span>
-                    </li>
-                </a>
-                <a href="https://api.kurisubrooks.com/panel">
-                    <li>
-                        <img src="./bookmarks/sherlock.png">
-                        <span>Sherlock</span>
-                    </li>
-                </a>
-                <a href="http://mana.kurisubrooks.com/">
-                    <li>
-                        <img src="./bookmarks/mana.png">
-                        <span>Mana</span>
-                    </li>
-                </a>
-                <a href="https://cloud.digitalocean.com/droplets/">
-                    <li>
-                        <img src="./bookmarks/digitalocean.png">
-                        <span>DigitalOcean</span>
-                    </li>
-                </a>
-            </ul>
+            <ul id="bookmarks"></ul>
         </div>
     </div>
 
