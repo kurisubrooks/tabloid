@@ -1,68 +1,4 @@
 var state = false;
-var name = "kurisu";
-
-var bookmarks = [
-    {
-        title: "Messenger",
-        icon: "messenger",
-        hyperlink: "https://www.messenger.com/"
-    },
-    {
-        title: "Twitter",
-        icon: "twitter",
-        hyperlink: "https://twitter.com/"
-    },
-    {
-        title: "YouTube",
-        icon: "youtube",
-        hyperlink: "https://www.youtube.com/feed/subscriptions"
-    },
-    {
-        title: "Tumblr",
-        icon: "tumblr",
-        hyperlink: "https://tumblr.com/dashboard"
-    },
-    {
-        title: "GitHub",
-        icon: "github",
-        hyperlink: "https://github.com/"
-    },
-    {
-        title: "Reddit",
-        icon: "reddit",
-        hyperlink: "https://reddit.com/"
-    },
-    {
-        title: "Google Play Music",
-        icon: "playmusic",
-        hyperlink: "https://play.google.com/music/listen"
-    },
-    {
-        title: "Sherlock",
-        icon: "sherlock",
-        hyperlink: "https://api.kurisubrooks.com/panel/"
-    },
-    {
-        title: "Mana",
-        icon: "mana",
-        hyperlink: "http://mana.kurisubrooks.com/"
-    },
-    {
-        title: "DigitalOcean",
-        icon: "digitalocean",
-        hyperlink: "https://cloud.digitalocean.com/droplets/"
-    }
-];
-
-var quotes = [
-    "You can't win if you don't participate",
-    "Try something today that you didn't do yesterday.",
-    "Let's make today a good day!",
-    "Let's do our best today!",
-    "Are you eating enough fiber?",
-    "Remember to drink enough water today!",
-    "Are you eating enough vegetables?"
-]
 
 function firstCap(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -70,6 +6,12 @@ function firstCap(string) {
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
+}
+
+function setBookmarks() {
+    for (let item of bookmarks) {
+        $("#bookmarks").append("<li><a href=\"" + item.hyperlink + "\"><img src=\"" + item.icon + "\"><span>" + item.title + "</span></a></li>")
+    };
 }
 
 function toggleBookmarks() {
@@ -88,27 +30,21 @@ function toggleBookmarks() {
     $(".toggle").toggleClass("active");
 }
 
-function setBookmarks() {
-    for (let item of bookmarks) {
-        $("#bookmarks").append("<li><a href=\"" + item.hyperlink + "\"><img src=\"./bookmarks/" + item.icon + ".png\"><span>" + item.title + "</span></a></li>")
-    };
-}
-
 function loop() {
     var hour = moment().format("H");
     $("#clock #time").text(moment().format("h:mm A"));
     $("#clock #date").text(moment().format("dddd, Do MMMM YYYY"));
 
     if (hour >= 18 && hour <= 23) {
-        $("#daygreet").text("Good Evening");
+        $("#daygreet").text(dayTimes.evening);
     } else if (hour >= 0 && hour <= 9) {
-        $("#daygreet").text("Good Morning");
+        $("#daygreet").text(dayTimes.morning);
     } else if (hour >= 10 && hour <= 14) {
-        $("#daygreet").text("Good Day");
+        $("#daygreet").text(dayTimes.day);
     } else if (hour >= 15 && hour <= 17) {
-        $("#daygreet").text("Good Afternoon");
+        $("#daygreet").text(dayTimes.afternoon);
     } else {
-        $("#daygreet").text("Hello");
+        $("#daygreet").text(dayTimes.generic);
     }
 }
 
@@ -118,6 +54,8 @@ function handleRequest(input) {
     // figure out intent
     const patterns = {
         convert: /((?:\+|-)?\d*\.?\d+)\s?(.+) (?:to|as|in) (.+)/,
+        money: /null/,
+        url: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
         radar: /^radar$/,
         weather: /^weather$/
     }
@@ -140,16 +78,21 @@ function handleRequest(input) {
     }
 
     // return window.location.href = "https://www.google.com.au/#q="
-        + encodeURIComponent($("#text").val()).replace(/%20/g, "+");
+        // + encodeURIComponent($("#text").val()).replace(/%20/g, "+");
 }
 
-$(function () {
+$(function() {
     loop();
     setBookmarks();
+    getWeather();
 
     $("#name").text(firstCap(name));
     $("#quote").text(randomItem(quotes));
-    $("#search input").attr("placeholder", "How may I help?");
+    $("#search input").attr("placeholder", placeholder);
+
+    if (theme === "dark" || theme === "light") {
+        $("body").addClass(theme);
+    }
 
     setInterval(function() {
         loop();
@@ -168,30 +111,7 @@ $(function () {
 
     $("#search").on("focusout", function(event) {
         $(".search").removeClass("active");
-        $(".search input").attr("placeholder", "How may I help?");
-    });
-
-    $.getJSON("https://api.kurisubrooks.com/api/weather", function(data) {
-        if (!data.ok) {
-            $("#weather #details").text("Error");
-            $("#weather #condition").text(data.error);
-            $("#weather #hilo").text("Try again later");
-            $("#weather #icon").attr("src", "./icons/weather/unknown.png");
-            return false;
-        }
-
-        var icon = data.weather.image,
-            temp = data.weather.temperature,
-            city = data.location.city,
-            condition = data.weather.condition,
-            forecast = data.forecast[0];
-
-        $("#weather #details").text(temp + "° in " + city);
-        $("#weather #condition").text(condition);
-        $("#weather #hilo").text("Hi: " + forecast.high + "° Lo: " + forecast.low + "°");
-        $("#weather #icon").attr("src", "./icons/weather/" + data.weather.icon + "_light.png");
-
-        return false;
+        $(".search input").attr("placeholder", placeholder);
     });
 
     $("#show").on("click", function(event) {
