@@ -87,11 +87,13 @@ ul, li {
     margin: 0;
     margin-bottom: 10px;
     font-weight: 400;
+    font-size: 1.65em;
 }
 
 .container .header .message h4 {
     margin: 0;
     font-weight: 400;
+    font-size: 1.2em;
 }
 
 .container .omnibox {
